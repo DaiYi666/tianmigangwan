@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta lang="zh-CN" charset="utf-8" />
+		<title>用户登录</title>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row show-area">
+
+				<div class="col-sm-7 col-sm-offset-1">
+					<div id="slidershow" class="carousel slide" data-ride="carousel" data-interval ="3000" data-pause = "hover" data-wrap="true">
+						<!-- 设置图片轮播的顺序 -->
+						<ol class="carousel-indicators">
+							<li class="active" data-target="#slidershow" data-slide-to="0" ></li>
+							<li data-target="#slidershow" data-slide-to="1"></li>
+							<li data-target="#slidershow" data-slide-to="2"></li>
+							<li data-target="#slidershow" data-slide-to="3"></li>
+						</ol>
+						<!--设置轮播的图片-->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img class="image img-thumbnail" src="img/carousel-1.jpg" alt="cat1">
+							</div>
+							<div class="item">
+								<img class="image img-thumbnail" src="img/carousel-2.jpg" alt="cat2">
+							</div>
+							<div class="item">
+								<img class="image img-thumbnail" src="img/carousel-3.jpg" alt="cat2">
+							</div>
+							<div class="item">
+								<img class="image img-thumbnail" src="img/carousel-4.jpg" alt="cat2">
+							</div>
+						</div>
+						<a class="left carousel-control" href="#slidershow" role="button" data-slide="prev" >
+							<span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a class="right carousel-control" href="#slidershow" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+					</div>
+				</div>
+
+
+
+				<div class="col-sm-2 login col-sm-offset-1">
+					<form>
+						<div class="form-group">
+							<label for="phoneNumber">用户名</label>
+							<input type="number" value="" class="form-control" id="phoneNumber" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="手机号">
+						</div>
+
+						<div class="form-group">
+							<label for="password">密码</label>
+							<a href="#" class="pull-right">忘记密码？</a>
+							<input type="password" value="" class="form-control" id="password" placeholder="密码" maxlength="18">
+						</div>
+
+						<div class="form-group">
+							<img src="/validateCode/getValidateCodeImage" id="validateCodeImage" title="点击刷新验证码" />
+						</div>
+
+						<div class="form-group">
+							<label for="validateCode">验证码</label>
+							<input type="text" value="" class="form-control" id="validateCode" placeholder="验证码" maxlength="4">
+						</div>
+
+						<div class="checkbox">
+							<label><input id="rememberPassword" checked="checked" type="checkbox">记住密码</label>
+						</div>
+
+						<button type="button" class="btn btn-default" id="login"><strong>立即登录</strong></button>
+
+						<a href="#" class="pull-right">注册用户</a>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		<div class="modal fade" id="prompt" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="">登录提示</h4>
+                    </div>
+                    
+                    <div class="modal-body">
+                  		<h4 id="message"></h4>
+                    </div>
+                    
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
+                 	</div>
+                </div>
+            </div>
+        </div>
+		
+
+	</body>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/userLogin.css" />
+	<link rel="stylesheet" type="text/css" href="css/general.css" />
+	<script src="bootstrap/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/userLogin.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/general.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</html>
