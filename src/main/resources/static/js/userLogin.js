@@ -1,8 +1,6 @@
 $(function () {
 
-    // getUserAccount();
-
-    closeWindowAndGoto("https://www.baidu.com");
+    getUserAccount();
 
     //登录按钮的点击事件
     $("#login").click(function () {
@@ -31,7 +29,7 @@ $(function () {
             if (responseCode == 200) {
                 if ($("#rememberPassword").is(":checked")) {
                     rememberPassword(userData.phoneNumber, userData.password, 7);
-                    closeWindowAndGoto("https://www.baidu.com");
+                    goto("https://www.baidu.com");
                     return;
                 }
             } else if (responseCode == 406) {
