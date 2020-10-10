@@ -6,8 +6,6 @@ $(function () {
     $("#login").click(function () {
         let userData = getUserData();
 
-        console.log(checkVerificationCode(userData.validateCode));
-
         if (userData.phoneNumber == "") {
             popUpPrompts("请输入手机号！", "red");
         } else if (!isPhoneNumber(userData.phoneNumber)) {
@@ -26,16 +24,21 @@ $(function () {
             $("#validateCodeImage").trigger("click");
         } else {
             let responseCode = authentication(userData);
-            if (responseCode == 200) {
+            console.log(responseCode);
+            if (responseCode == ResponseCode.SUCCESS) {
                 if ($("#rememberPassword").is(":checked")) {
                     rememberPassword(userData.phoneNumber, userData.password, 7);
-                    goto("https://www.baidu.com");
+                    goto("/user/homepage.html");
+                    alert("登陆成功");
                     return;
                 }
-            } else if (responseCode == 406) {
+            } else if (responseCode == ResponseCode.INVALID_PASSWORD) {
                 popUpPrompts("密码错误！", "red");
                 $("#validateCodeImage").trigger("click");
-            } else if (responseCode == 555) {
+            } else if (responseCode == ResponseCode.NO_SPECIFIED_RECORD) {
+                popUpPrompts("用户不存在！", "red");
+                $("#validateCodeImage").trigger("click");
+            } else if (responseCode == ResponseCode.SERVER_EXCEPTION) {
                 popUpPrompts("服务器异常，请稍后再试！", "orange");
                 $("#validateCodeImage").trigger("click");
             }
@@ -112,18 +115,10 @@ function checkVerificationCode(validateCode) {
 }
 
 
-function popUpPrompts(message, color) {
-    $("#message").text(message).css({
-        "color": color
-    });
-}
-
-
 function rememberPassword(phoneNumber, password, time) {
     $.cookie("phoneNumber", phoneNumber, {expires: time});
     $.cookie("password", password, {expires: time});
 }
-
 
 
 function getUserAccount() {

@@ -11,3 +11,16 @@ mybatis:
   mapper-locations: classpath:com/tianmigangwan/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+
+
+spring:
+  mail:
+    username: 898469219@qq.com
+    password: ofmggvcvanbmbcdj
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true

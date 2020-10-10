@@ -13,12 +13,16 @@ import java.util.Date;
 public class User {
     private String id;
     private String nickname;
+    private String headPortrait;
     private String gender;
     private String phoneNumber;
     private String email;
+    private int photoCount;
+    private int videoCount;
     private String password;
     private Date createTime;
     private Date updateTime;
+
 
     public void passwordEncryption(){
         this.password=DigestUtils.md5DigestAsHex(this.password.getBytes());

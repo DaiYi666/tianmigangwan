@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ch-ZN">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row head">
+        <div class="col-sm-12 navigation-bar">
+            <button class="btn btn-danger pull-right" id="log-out">退出登录</button>
+        </div>
+    </div>
+
+    <div class="row body">
+        <div class="col-sm-2  body-left">
+            <div class="row user-info">
+                <div class="col-sm-7">
+                    <img id="head-portrait" src="../img/headPortrait/default/default.jpg" class="img-responsive center-block img-thumbnail">
+                </div>
+
+                <div class="col-sm-5">
+                    <h4 id="nickname">hello word</h4>
+                    <p><strong>图片：</strong><span id="photo-count">999</span></p>
+                    <p><strong>视频：</strong><span id="video-count">888</span></p>
+                </div>
+            </div>
+
+
+            <div class="row menu">
+                <div class="col-sm-12">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item">我的照片</button>
+                        <button type="button" class="list-group-item">我的视频</button>
+                        <button type="button" class="list-group-item active">广场</button>
+                        <button type="button" class="list-group-item">私密空间</button>
+                        <button type="button" class="list-group-item">个人中心</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row menu">
+                <div class="col-sm-12">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item">上传照片/视频</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row menu">
+                <div class="col-sm-12">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item">关于我们</button>
+                        <button type="button" class="list-group-item">帮助</button>
+                        <button type="button" class="list-group-item">报个bug</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-9 body-right">
+            <div class="row">
+                <div class="col-sm-12">
+                    <iframe id="window" src="https://www.baidu.com" scrolling="no" frameborder="0"
+                            allowTransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="prompt" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="">温馨提示</h4>
+            </div>
+
+            <div class="modal-body">
+                <h4 id="message"></h4>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/general.css"/>
+<link rel="stylesheet" type="text/css" href="../css/homepage.css">
+
+<script src="../bootstrap/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/general.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="../js/homepage.js" type="text/javascript" charset="utf-8"></script>
+</html>

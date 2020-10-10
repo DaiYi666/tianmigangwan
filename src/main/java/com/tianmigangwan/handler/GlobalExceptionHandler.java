@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public CommonResult defaultExceptionHandler(){
+    public CommonResult defaultExceptionHandler(Exception exception){
+        exception.printStackTrace();
         CommonResult result = new CommonResult();
         result.setResponseCode(ResponseCode.SERVER_EXCEPTION);
         result.setMessage("server exception");

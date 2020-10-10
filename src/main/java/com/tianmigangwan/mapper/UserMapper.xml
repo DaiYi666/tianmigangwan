@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tianmigangwan.mapper.UserMapper">
 
-    <sql id="columns">`id`,`nickname`,`gender`,`phone_number`,`email`,`city`,`password`,`create_time`,`update_time`</sql>
+    <sql id="columns">`id`,`nickname`,`head_portrait`,`gender`,`phone_number`,`email`,`city`,`photo_count`,`video_count`,`password`,`create_time`,`update_time`</sql>
 
 
     <select id="queryUserByPhoneNumber" resultType="user" parameterType="string">
