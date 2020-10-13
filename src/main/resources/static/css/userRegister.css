@@ -1,0 +1,25 @@
+body{
+    background-image: url("../img/backgroundImage/background-05.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.body{
+    margin-top: 30vh;
+}
+
+.user-information-area{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 1rem;
+}
+
+#send-email-verification-code{
+    /*margin-left: 0;*/
+}
+
+
+div{
+    /*background-color: rgba(0,0,0,0.2);*/
+}

@@ -13,5 +13,9 @@ public class ResponseCode {
 
     public static final int NO_SPECIFIED_RECORD = 408;  //没有指定的记录
 
+    public static final int PHONE_NUMBER_ALREADY_EXISTS = 409;  //手机号已经存在了
+
+    public static final int EMAIL_ALREADY_EXISTS = 410;  //邮箱已经存在了
+
     public static final int SERVER_EXCEPTION = 555;  //服务器异常
 }

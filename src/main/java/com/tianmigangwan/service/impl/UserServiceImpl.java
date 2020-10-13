@@ -1,7 +1,5 @@
 package com.tianmigangwan.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.sun.deploy.net.HttpResponse;
 import com.tianmigangwan.mapper.UserMapper;
 import com.tianmigangwan.pojo.CommonResult;
 import com.tianmigangwan.pojo.User;
@@ -10,7 +8,6 @@ import com.tianmigangwan.utils.MailSender;
 import com.tianmigangwan.utils.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +32,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResult authentication(User user, HttpSession session) {
-        long startTime = System.currentTimeMillis();
         CommonResult result = new CommonResult<>();
-
         User record = userMapper.queryUserByPhoneNumber(user.getPhoneNumber());//调用mapper接口查询数据库
-        log.info("前台传过来的用户信息：" + user);
-        log.info("数据库中查到的用户信息：" + record);
         user.passwordEncryption();
 
         if (record == null) {
@@ -50,19 +43,12 @@ public class UserServiceImpl implements UserService {
             result.setResponseCode(ResponseCode.SUCCESS);
             result.setMessage("password authentication passed");//密码验证通过
             session.setAttribute("user", record);
-
-
             sendLoginReminderEmail(record);
         } else {
             result.setResponseCode(ResponseCode.INVALID_PASSWORD);
             result.setMessage("wrong phone number or password");//手机号或者密码不正确
         }
 
-        long endTime = System.currentTimeMillis();
-//        log.info("单线程情况下共耗时"+(endTime-startTime));
-        log.info("多线程情况下共耗时" + (endTime - startTime));
-        //多线程情况下共耗时168
-        //单线程情况下共耗时3441
         return result;
     }
 
@@ -79,17 +65,35 @@ public class UserServiceImpl implements UserService {
         content.append(loginTime);
         content.append("成功登录了客户端");
         new MailSender(mailSender, sender, user.getEmail(), "登录提醒", content.toString()).sendEmail();
-
-
-
-
-
     }
 
-    public static String getAddressByIP(String ip) {
-        String url = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=6006&format=json&query=" + ip;
-//        JSON.parse
-        return null;
+    @Override
+    public CommonResult addUser(User user) {
+        CommonResult result = new CommonResult();
+
+        if (isPhoneNumberBinding(user.getPhoneNumber())){
+            result.setResponseCode(ResponseCode.PHONE_NUMBER_ALREADY_EXISTS);
+            result.setMessage("the phone number has been registered");
+        }else if (isEmailBinding(user.getEmail())){
+            result.setResponseCode(ResponseCode.EMAIL_ALREADY_EXISTS);
+            result.setMessage("the mailbox has been registered");
+        }else {
+            user.generateId();
+            userMapper.addUser(user);
+            result.setResponseCode(ResponseCode.SUCCESS);
+            result.setMessage("registered successfully");
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isPhoneNumberBinding(String phoneNumber) {
+        return userMapper.isPhoneNumberBinding(phoneNumber);
+    }
+
+    @Override
+    public boolean isEmailBinding(String email) {
+        return userMapper.isEmailBinding(email);
     }
 
 }

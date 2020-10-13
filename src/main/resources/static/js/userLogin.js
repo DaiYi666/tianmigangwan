@@ -3,7 +3,7 @@ $(function () {
     getUserAccount();
 
     //登录按钮的点击事件
-    $("#login").click(function () {
+    $("#login").on("click",function () {
         let userData = getUserData();
 
         if (userData.phoneNumber == "") {
@@ -18,29 +18,28 @@ $(function () {
             popUpPrompts("请输入验证码！", "red");
         } else if (userData.validateCode.length < 4) {
             popUpPrompts("验证码不足4位数！", "red");
-            $("#validateCodeImage").trigger("click");
+            $("#validate-code-image").trigger("click");
         } else if (!checkVerificationCode(userData.validateCode)) {
             popUpPrompts("验证码错误！", "red");
-            $("#validateCodeImage").trigger("click");
+            $("#validate-code-image").trigger("click");
         } else {
             let responseCode = authentication(userData);
             console.log(responseCode);
             if (responseCode == ResponseCode.SUCCESS) {
                 if ($("#rememberPassword").is(":checked")) {
                     rememberPassword(userData.phoneNumber, userData.password, 7);
-                    goto("/user/homepage.html");
-                    alert("登陆成功");
+                    window.location.replace("/user/homepage.html");
                     return;
                 }
             } else if (responseCode == ResponseCode.INVALID_PASSWORD) {
                 popUpPrompts("密码错误！", "red");
-                $("#validateCodeImage").trigger("click");
+                $("#validate-code-image").trigger("click");
             } else if (responseCode == ResponseCode.NO_SPECIFIED_RECORD) {
                 popUpPrompts("用户不存在！", "red");
-                $("#validateCodeImage").trigger("click");
+                $("#validate-code-image").trigger("click");
             } else if (responseCode == ResponseCode.SERVER_EXCEPTION) {
                 popUpPrompts("服务器异常，请稍后再试！", "orange");
-                $("#validateCodeImage").trigger("click");
+                $("#validate-code-image").trigger("click");
             }
         }
 
@@ -48,7 +47,7 @@ $(function () {
     });
 
     //验证码图片的点击事件
-    $("#validateCodeImage").click(function () {
+    $("#validate-code-image").on("click",function () {
         $(this).attr({"src": "/validateCode/getValidateCodeImage?" + new Date().getTime()});
     });
 
@@ -65,19 +64,12 @@ $(function () {
 ////  }
 //});
 
-function isPhoneNumber(phoneNumber) {
-    let rule = /^1[3456789]\d{9}$/;
-    if (rule.test(phoneNumber)) {
-        return true;
-    }
-    return false;
-}
 
 function getUserData() {
-    let phoneNumber = $("#phoneNumber").val();
+    let phoneNumber = $("#phone-number").val();
     let userPassword = $("#password").val();
-    let validateCode = $("#validateCode").val();
-    let userData = {"phoneNumber": phoneNumber, "password": userPassword, "validateCode": validateCode};
+    let verificationCode = $("#verification-code").val();
+    let userData = {"phoneNumber": phoneNumber, "password": userPassword, "verificationCode": verificationCode};
     return userData;
 }
 
@@ -104,7 +96,7 @@ function checkVerificationCode(validateCode) {
     let isSuccess = false;
     $.ajax({
         type: "GET",
-        url: "/validateCode/getValidateCode",
+        url: "/verificationCode/getImageVerificationCode",
         async: false,
         success: function (result) {
             isSuccess = result.toLowerCase() === validateCode.toLowerCase();

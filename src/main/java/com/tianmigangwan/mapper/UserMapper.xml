@@ -14,4 +14,19 @@
         where `phone_number`=#{phoneNumber};
     </select>
 
+
+    <insert id="addUser" parameterType="user">
+        insert into `user`(<include refid="columns"/>)
+        values(#{user.id},#{user.nickname},#{user.headPortrait},#{user.gender},#{user.phoneNumber},#{user.email},#{user.photoCount},#{user.videoCount},#{user.password},#{user.createTime},#{user.updateTime},#{user.isSendLoginPromptEmail});
+    </insert>
+
+
+    <select id="isPhoneNumberBinding" parameterType="string" resultType="boolean">
+        <![CDATA[ select count(`phone_number`) from `user` where `phone_number` = #{phoneNumber} ]]>
+    </select>
+
+    <select id="isEmailBinding" parameterType="string" resultType="boolean">
+        <![CDATA[ select count(`email`) from `user` where `email` = #{email} ]]>
+    </select>
+
 </mapper>

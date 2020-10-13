@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -22,9 +23,14 @@ public class User {
     private String password;
     private Date createTime;
     private Date updateTime;
+    private String isSendLoginPromptEmail;
 
 
     public void passwordEncryption(){
         this.password=DigestUtils.md5DigestAsHex(this.password.getBytes());
+    }
+
+    public void generateId(){
+        this.id=UUID.randomUUID().toString();
     }
 }

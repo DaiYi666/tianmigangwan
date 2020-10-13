@@ -34,6 +34,10 @@ body{
     margin-top: 2vh;
 }
 
+#nickname{
+    font-weight: 900;
+    font-style: oblique;
+}
 
 .menu{
     margin-top: 2vh;
