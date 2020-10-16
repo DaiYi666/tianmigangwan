@@ -54,11 +54,7 @@ public class UserController {
 
     @PostMapping("/register")
     public CommonResult register(@RequestBody User user){
-        System.out.println(user);
-
-        CommonResult result = new CommonResult();
-        result.setResponseCode(ResponseCode.SUCCESS);
-        return result;
+        return userService.addUser(user);
     }
 
 

@@ -55,8 +55,10 @@ $(function () {
             let responseCode = submit(userData);
             if (responseCode == ResponseCode.SUCCESS) {
                 popUpPrompts("注册成功！", "green");
-            } else if (responseCode == ResponseCode.FAILURE) {
-                popUpPrompts("注册失败！", "red");
+            } else if (responseCode == ResponseCode.PHONE_NUMBER_ALREADY_EXISTS) {
+                popUpPrompts("这个电话号码已经被注册了！", "red");
+            } else if (responseCode == ResponseCode.EMAIL_ALREADY_EXISTS) {
+                popUpPrompts("这个邮箱已经被注册了！", "red");
             } else if (responseCode == ResponseCode.SERVER_EXCEPTION) {
                 popUpPrompts("服务器正忙，请稍后再试！", "yellow");
             }
@@ -65,6 +67,12 @@ $(function () {
         $("#prompt").modal("show");
     });
 
+
+
+    $("#go-login").on("click",function () {
+        window.location.replace("/user/userLogin.html");
+        return false;
+    });
 
 });
 
@@ -87,9 +95,7 @@ function verificationVerificationCode(verificationCode) {
         contentType: "application/json",
         async: false,
         success: function (result) {
-            console.log("获取到的邮箱验证码是："+result);
             isCorrect=verificationCode == result;
-            console.log(verificationCode == result);
         }
     });
 

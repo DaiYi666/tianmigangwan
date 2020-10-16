@@ -16,6 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author 代毅
+ */
+
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
@@ -79,7 +83,8 @@ public class UserServiceImpl implements UserService {
             result.setMessage("the mailbox has been registered");
         }else {
             user.generateId();
-            userMapper.addUser(user);
+            int i = userMapper.addUser(user);
+            log.info("用户信息是："+user+"已添加"+i+"条记录");
             result.setResponseCode(ResponseCode.SUCCESS);
             result.setMessage("registered successfully");
         }

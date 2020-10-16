@@ -52,6 +52,11 @@ $(function () {
     });
 
 
+    $("#register").on("click",function () {
+        window.location.replace("/user/userRegister.html");
+    });
+
+
 });
 
 //$(document).ready(function() {

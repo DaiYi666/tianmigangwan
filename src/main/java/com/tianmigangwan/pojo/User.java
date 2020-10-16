@@ -18,13 +18,13 @@ public class User {
     private String gender;
     private String phoneNumber;
     private String email;
+    private String city;
     private int photoCount;
     private int videoCount;
     private String password;
     private Date createTime;
     private Date updateTime;
     private String isSendLoginPromptEmail;
-
 
     public void passwordEncryption(){
         this.password=DigestUtils.md5DigestAsHex(this.password.getBytes());

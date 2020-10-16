@@ -16,10 +16,9 @@
 
 
     <insert id="addUser" parameterType="user">
-        insert into `user`(<include refid="columns"/>)
-        values(#{user.id},#{user.nickname},#{user.headPortrait},#{user.gender},#{user.phoneNumber},#{user.email},#{user.photoCount},#{user.videoCount},#{user.password},#{user.createTime},#{user.updateTime},#{user.isSendLoginPromptEmail});
+        insert into `user`(`id`,`nickname`,`phone_number`,`gender`,`email`,`password`)
+        values(#{user.id},#{user.nickname},#{user.phoneNumber},#{user.gender},#{user.email},#{user.password});
     </insert>
-
 
     <select id="isPhoneNumberBinding" parameterType="string" resultType="boolean">
         <![CDATA[ select count(`phone_number`) from `user` where `phone_number` = #{phoneNumber} ]]>
